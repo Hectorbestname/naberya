@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<title>HAHAHAHAH</title>
+<style>
+body{
+    margin:0;
+    background:black;
+    overflow:hidden;
+    font-family:Consolas, monospace;
+}
+
+#terminal{
+    color:#00ff00;
+    padding:20px;
+    white-space:pre-wrap;
+    font-size:18px;
+}
+
+#alert{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:black;
+    color:red;
+    text-align:center;
+}
+
+#skull{
+    font-size:150px;
+    margin-top:100px;
+}
+
+#question{
+    font-size:32px;
+    margin-top:20px;
+}
+
+.blink{
+    animation:blink .5s infinite;
+}
+
+@keyframes blink{
+    50%{opacity:0;}
+}
+</style>
+</head>
+<body>
+
+<div id="terminal"></div>
+
+<div id="alert">
+    <div id="skull">☠</div>
+    <div id="question">
+         Beni seviyormusun? 
+    </div>
+    <h2 class="blink">CEVAP VER!</h2>
+</div>
+
+<script>
+const terminal = document.getElementById("terminal");
+
+function randomLine(){
+    const chars =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#$%@";
+
+    let str="";
+
+    for(let i=0;i<80;i++){
+        str += chars[Math.floor(Math.random()*chars.length)];
+    }
+
+    terminal.innerHTML += str + "\n";
+
+    if(terminal.innerHTML.length > 10000){
+        terminal.innerHTML =
+        terminal.innerHTML.slice(5000);
+    }
+}
+
+let count = 0;
+
+const interval = setInterval(()=>{
+
+    randomLine();
+
+    count++;
+
+    if(count > 120){
+
+        clearInterval(interval);
+
+        document.body.style.background = "#500";
+
+        terminal.style.color = "red";
+
+        setTimeout(()=>{
+
+            document.getElementById("alert")
+            .style.display = "block";
+
+        },1500);
+    }
+
+},50);
+</script>
+
+</body>
+</html>
